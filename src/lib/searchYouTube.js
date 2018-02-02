@@ -11,10 +11,10 @@ var searchYouTube = function (options, callback) {
         part: 'snippet',
         videoEmbeddable: true,
         type: 'video',
-        maxResults: options.maxResults || 5
+        maxResults: options.max || 5
       },
       success: function(data) {
-        callback(data);
+        callback(data.items);
       },
       error: function(event) {
         console.log(event);

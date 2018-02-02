@@ -1,17 +1,20 @@
 class App extends React.Component { 
   constructor(props) {
     super(props);
-    console.log('props', props);
-    props.searchYouTube();
-    this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
     this.getVideos = this.getVideos.bind(this);
-  } 
+    this.handleSearch = this.handleSearch.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
+  }
+  componentDidMount() {
+    this.props.searchYouTube({query: 'hamster dance'}, this.getVideos);
+  }
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search searchHandler={this.handleSearch} appState={this.state} />
           </div>
         </nav>
         <div className="row">
@@ -28,6 +31,7 @@ class App extends React.Component {
     this.setState({currentVideo: video});
   }
 
+  handleSearch(videos) { this.setState({'videos': videos}); }
     
   getVideos(data) {
     this.setState({'videos': data});
