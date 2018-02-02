@@ -1,7 +1,10 @@
 class App extends React.Component { 
   constructor(props) {
     super(props);
+    console.log('props', props);
+    props.searchYouTube();
     this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
+    this.getVideos = this.getVideos.bind(this);
   } 
   render() {
     return (
@@ -23,6 +26,11 @@ class App extends React.Component {
   }
   handleClick(video) {
     this.setState({currentVideo: video});
+  }
+
+    
+  getVideos(data) {
+    this.setState({'videos': data});
   }
 }
 // In the ES6 spec, files are "modules" and do not share a top-level scope
